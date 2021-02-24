@@ -15,10 +15,19 @@ Output:
 */
 
 var findDisappearedNumbers = function(nums) {
-    
-    
+    let length = nums.length;
+    let final = Array.from({length: length}, (_, i) => i + 1)
+
+    for ( let i = 0; i < nums.length; i++) {
+        let remove = final.indexOf(nums[i]) 
+        if (remove >= 0) {
+            final.splice(remove, 1)
+        }
+    }
+    return final
 };
 
 let test = () => {
     console.log(findDisappearedNumbers([4,3,2,7,8,2,3,1]))
 }
+test()
