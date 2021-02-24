@@ -26,21 +26,35 @@ var maxProfit = function(prices) {
     let total = 0;
 
     let bought;
-    let sold;
 
     for (let i = 0; i < prices.length; i++) {
-        if (prices[i + 1] < prices[i]){
-            bought = {price: prices[i + 1], index: i + 1};
-            continue;
+        if (bought) {
+            if (prices[i] > prices[i + 1]) {
+                total += prices[i] - bought.price;
+                bought = null
+            }
         }
-        if (bought && (prices[i + 1] > prices[i]) && (prices[i + 1] < prices[i + 2])) {
-            sold = 
+        if (bought && (prices[i] < prices[i + 1])) {
+            if (prices[i + 1] < prices[i + 2]) {
+                continue;
+            }
         }
-        console.log(bought)
+        if (!bought && prices[i] < prices[i + 1]){
+            bought = {price: prices[i], val: ''};
+        }
     }
+
+    if (bought && total === 0) {
+        total = prices[prices.length - 1] - bought.price;
+    } else if ( bought && total > 0) {
+        total += prices[prices.length - 1] - bought.price;
+    }
+    return total;
 };
 
 let test = () => {
-    console.log(maxProfit([7,1,5,3,6,4]))
+    console.log(maxProfit([2,1,2,0,1]))
 }
 test()
+
+// [6,1,3,2,4,7]
