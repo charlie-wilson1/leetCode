@@ -32,7 +32,6 @@ class ListNode {
         this.next = next;
     }
 }
-
 class MyHashMap {
     constructor() {
         this.size = 19997
@@ -42,17 +41,60 @@ class MyHashMap {
     hash(key) {
         return key * this.mult % this.size
     }
+    put(key, value) {
+        this.remove(key)
+        let hashed = this.hash(key);
+        let node = new ListNode(key, value, this.data[hashed]);
+        this.data[hashed] = node;
+    }
+    get(key) {
+        let hashed = this.hash(key);
+        if (this.data[hashed] === undefined) {
+            return -1;
+        }
+        if (this.data[hashed].key === key) {
+            return this.data[hashed].val;
+        } else {
+            let node = this.data[hashed].next;
+            while (node.next !== undefined) {
+                if (node.key === key) {
+                    return node.val;
+                }
+                node = node.next;
+            } 
+        }
+        return -1;
+    }
+    remove(key) {
+        let hashed = this.hash(key);
+        if (this.data[hashed] === undefined) {
+            return
+        }
+        if (this.data[hashed].key === key) {
+            this.data[hashed] = this.data[hashed].next;
+        } else {
+            let node = this.data[hashed.next];
+            while (node.next !== undefined) {
+                if (node.key === key) {
+                    node.next = node.next.next;
+                    return;
+                }
+            }
+        }
+
+    }
 
 }
 
 let test = () => {
     let hashMap = new MyHashMap();
-    hashMap.put(1, 1);          
+    hashMap.put(1, 1);  
     hashMap.put(2, 2);         
-    hashMap.get(1);            // returns 1
-    hashMap.get(3);            // returns -1 (not found)
+    console.log(hashMap.get(1));            // returns 1
+    console.log(hashMap.get(3));            // returns -1 (not found)
     hashMap.put(2, 1);          // update the existing value
-    hashMap.get(2);            // returns 1 
+    console.log(hashMap.get(2));            // returns 1 
     hashMap.remove(2);          // remove the mapping for 2
-    hashMap.get(2);            // returns -1 (not found) 
+    console.log(hashMap.get(2));            // returns -1 (not found) 
 }
+test()
