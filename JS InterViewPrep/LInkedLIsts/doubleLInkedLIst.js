@@ -76,6 +76,24 @@ class LinkedList {
         }
         return false;
     }
+    //indexOf 
+    indexOf(val) {
+        //searches linked list for input value and each time it finds a node with that value add that nodes index to an array and returns the array at the end;
+        let result = [];
+        let index = 0;
+        let root = this.head;
+        while (root) {
+            if (root.val === val) {
+                result.push(index);
+                index++;
+                root = root.next;
+            } else {
+                index++;
+                root = root.next;
+            }
+        }
+        return result;
+    }
 }
 
 let test = () => {
@@ -84,6 +102,7 @@ let test = () => {
     newList.addToTail(15);
     newList.addToTail(16);
     newList.addToHead(17);
-    console.log(newList.searchList());
+    newList.addToTail(17);
+    console.log(newList.indexOf(17))
 }
 test()
