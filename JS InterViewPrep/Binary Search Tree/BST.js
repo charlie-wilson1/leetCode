@@ -77,6 +77,19 @@ class BST {
             this.right.dftPreorder(func);
         }
     }
+
+    dftPostOrder(func) {
+        //if the current node has a left child traverse dount to that one
+        if (this.left) {
+            this.left.dftPostOrder(func);
+        }
+        //if the current node has a right child, traverse down to that
+        if (this.right) {
+            this.right.dftPostOrder(func);
+        }
+        //first if the current node doesnt have a right or left child then run the input function on its value
+        func(this.val)
+    }
 }
 
 
@@ -89,7 +102,7 @@ let test = () => {
     root.insert(105)
     root.insert(90)
     console.log(root)
-    console.log(root.dftPreorder((val) => {
+    console.log(root.dftPostOrder((val) => {
         console.log(val)
     }))
 }
