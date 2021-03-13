@@ -64,6 +64,19 @@ class BST {
             this.right.depthFirstTraverse(func);
         }
     }
+
+    dftPreorder(func) {
+        //start by running the input function on the current nodes value
+        func(this.val);
+        //then go all the way through the left branch of the tree
+        if (this.left) {
+            this.left.dftPreorder(func);
+        }
+        //once youve gone through the entire left side of the root nodethen start checking for right nodes 
+        if (this.right) {
+            this.right.dftPreorder(func);
+        }
+    }
 }
 
 
@@ -75,8 +88,8 @@ let test = () => {
     root.insert(20);
     root.insert(105)
     root.insert(90)
-    // console.log(root)
-    console.log(root.depthFirstTraverse((val) => {
+    console.log(root)
+    console.log(root.dftPreorder((val) => {
         console.log(val)
     }))
 }
