@@ -120,29 +120,40 @@ class BST {
         //     if (currNode.right) queue.push(currNode.right);
         // }
     }
-
+    //return the smallest number in the tree
     getMinVal() {
+        //declare a current node set to this BST
         let currNode = this;
-
+        //declaere a temp variable to store the current smallest value
         let minVal;
+        //start a loop and keep running it while there is still a current node
         while (currNode) {
+            //set minVal to the current nodes value
             minVal = currNode.val;
+            //if there isnt a left child node
             if (!currNode.left) {
+                //return the minVal
                 return minVal;
             }
+            //set the current node to the current nodes left child
             currNode = currNode.left;
         }
     }
 
     getMaxVal() {
+        //declare a current node set to this BST
         let currNode = this;
-
+        //declaere a temp variable to store the current largest value
         let maxVal;
+        //start a loop and keep running it while there is still a current node
         while (currNode) {
+            //set maxVal to the current nodes value
             maxVal = currNode.val;
+            //if there isnt a right child, return the maxVal
             if (!currNode.right) {
                 return maxVal;
             }
+            //set current node to current nodes right child
             currNode = currNode.right;
         }
     }
