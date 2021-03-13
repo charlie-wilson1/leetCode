@@ -90,6 +90,32 @@ class BST {
         //first if the current node doesnt have a right or left child then run the input function on its value
         func(this.val)
     }
+
+    breadthFirstTraverse(func) {
+        let queue = [];
+        let rootNode = this;
+        queue.push(rootNode);
+        while (queue.length) {
+            let currNode = queue.shift();
+            if (!currNode) {
+                continue;
+            }
+            queue.push(currNode.left, currNode.right);
+            func(currNode.val)
+        }
+        // let recurse = (node) => {
+        //     if (!node.left && !node.right) {
+        //         return;
+        //     }
+        //     if (node.left && node.right) {
+        //         queue.push(node.left.val, node.right.val)
+        //         recurse(node.left)
+        //         recurse(node.right)
+        //     } 
+        // }
+        // recurse(this)
+        console.log(queue)
+    }
 }
 
 
@@ -101,8 +127,15 @@ let test = () => {
     root.insert(20);
     root.insert(105)
     root.insert(90)
+    root.insert(24)
+    root.insert(26)    
+    root.insert(34)
+    root.insert(36)
+    root.insert(89)
+    root.insert(91)
+    root.insert(90)
     console.log(root)
-    console.log(root.dftPostOrder((val) => {
+    console.log(root.breadthFirstTraverse((val) => {
         console.log(val)
     }))
 }
