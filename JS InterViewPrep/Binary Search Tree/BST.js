@@ -32,17 +32,37 @@ class BST {
     }
 
     contains(val) {
+        //base case: if the current nodes value is the same as the input value return true
         if (this.val === val) {
             return true;
         }
+        //if the input value is less than the current nodes value
         if (val < this.val) {
+            //first check if theres a left child, if not return false
             if (!this.left) return false;
+            //if there is a left child return the left child calling the contains method on it with the input value
             return this.left.contains(val);
+            //otherwise that means the input value is greater than the current n odes value 
         } else {
+            //first check if theres a right child of the current node, if not return false
             if (!this.right) return false;
+            //if there is return the right child calling the contains method on it with the input value passed in
             return this.right.contains(val);
         }
         return false;
+    }
+    //in order depth first traversal
+    depthFirstTraverse(func) {
+        //if there is a left child of the current node, run the depthFirstTraverse method on it passing in the input func
+        if (this.left) {
+            this.left.depthFirstTraverse(func);
+        }
+        //run the  input func on the current nodes values
+        func(this.val);
+        //if there is a right child of the current node run the depthFirstTraverse method on it passing in the input func
+        if (this.right) {
+            this.right.depthFirstTraverse(func);
+        }
     }
 }
 
@@ -55,7 +75,9 @@ let test = () => {
     root.insert(20);
     root.insert(105)
     root.insert(90)
-    console.log(root)
-    console.log(root.contains(107))
+    // console.log(root)
+    console.log(root.depthFirstTraverse((val) => {
+        console.log(val)
+    }))
 }
 test()
