@@ -92,29 +92,59 @@ class BST {
     }
 
     breadthFirstTraverse(func) {
+        //implement a queue
         let queue = [];
+        //declare the rot node as this and add it to the queue
         let rootNode = this;
         queue.push(rootNode);
+
+        //iterate over the queue while it still has length;
         while (queue.length) {
+            //declare a currentNode set to the first element of the queue shifted out of the queue (fifo)
             let currNode = queue.shift();
+            //if there is no current node (i.e. null ) continue to the next iteration
             if (!currNode) {
                 continue;
             }
+            //add the left child and right child of the current node to the queue
             queue.push(currNode.left, currNode.right);
+            // run the input iterator func on the current nodes value
             func(currNode.val)
         }
-        // let recurse = (node) => {
-        //     if (!node.left && !node.right) {
-        //         return;
-        //     }
-        //     if (node.left && node.right) {
-        //         queue.push(node.left.val, node.right.val)
-        //         recurse(node.left)
-        //         recurse(node.right)
-        //     } 
+
+        //or
+        // while (queue.length) {
+        //     let currNode = queue.shift();
+        //     func(currNode.val)
+        //     if ( currNode.left) queue.push(currNode.left);
+        //     if (currNode.right) queue.push(currNode.right);
         // }
-        // recurse(this)
-        console.log(queue)
+    }
+
+    getMinVal() {
+        let currNode = this;
+
+        let minVal;
+        while (currNode) {
+            minVal = currNode.val;
+            if (!currNode.left) {
+                return minVal;
+            }
+            currNode = currNode.left;
+        }
+    }
+
+    getMaxVal() {
+        let currNode = this;
+
+        let maxVal;
+        while (currNode) {
+            maxVal = currNode.val;
+            if (!currNode.right) {
+                return maxVal;
+            }
+            currNode = currNode.right;
+        }
     }
 }
 
@@ -134,9 +164,10 @@ let test = () => {
     root.insert(89)
     root.insert(91)
     root.insert(90)
+    root.insert(14)
+    root.insert(110)
+
     console.log(root)
-    console.log(root.breadthFirstTraverse((val) => {
-        console.log(val)
-    }))
+    console.log(root.getMaxVal())
 }
 test()
