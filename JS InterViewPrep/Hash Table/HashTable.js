@@ -27,6 +27,7 @@ class HashTable {
             while (node) {
                 if (node.key === key) {
                     node.val = value;
+                    return;
                 }
                 if (node.next === null && node.key !== key) {
                     let next = this.storage[index];
@@ -36,9 +37,24 @@ class HashTable {
                 node = node.next;
             }
         } else {
-            // let nextVal = this.storage[index] ? this.storage[index] : null;
             let newBucketNode = new BucketNode(key, value);
             this.storage[index] = newBucketNode;
+        }
+    }
+
+    get(key) {
+        let index = this.hash(key);
+        console.log(index)
+        if (this.storage[index].next === null) {
+            return this.storage[index].val;
+        } else {
+            let node = this.storage[index];
+            while (node) {
+                if (node.key === key) {
+                    return node.val;
+                }
+                node = node.next;
+            }
         }
     }
 }
@@ -47,8 +63,10 @@ let test = () => {
     let newHT = new HashTable(10);
     newHT.insert('Brian', 'cool');
     newHT.insert('Brian', 'fast');
+    newHT.insert('Jamie', 'mighty');
+    newHT.insert('June', 'baby');
     newHT.insert('here we', 'wang')
-    console.log(newHT.hash('here we'))
+    console.log(newHT.get('June'))
     console.log(newHT.storage)
 }
 test();
