@@ -55,12 +55,16 @@ class HashTable {
     get(key) {
         //set index to hased value of input key
         let index = this.hash(key);
+        //if there is nothing at the index return null
+        if (!this.storage[index]) {
+            return null;
+        }
         // if the next value of the element at the index is null that means that there is only one node and just return its value
         if (this.storage[index].next === null) {
             return this.storage[index].val;
         } else {
             //otherwise iterate over the LinkedList and once you find the node with the same key, return its value
-            let node = this.storage[index].next;
+            let node = this.storage[index];
             while (node) {
                 if (node.key === key) {
                     return node.val;
@@ -69,16 +73,36 @@ class HashTable {
             }
         }
     }
+
+    retrieveAll() {
+        let result = [];
+        let arr = this.storage;
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i]) {
+                if (arr[i].next === null) {
+                    result.push({key: arr[i].key, value: arr[i].val});
+                } else {
+                    let node = arr[i];
+                    while (node) {
+                        result.push({key: node.key, value: node.val});
+                        node = node.next;
+                    }
+                }
+            }
+        }
+        return result;
+    }
 }
 
 let test = () => {
     let newHT = new HashTable(10);
     newHT.insert('Brian', 'cool');
-    newHT.insert('Brian', 'fast');
-    newHT.insert('Jamie', 'mighty');
+    newHT.insert('Brian', 'daddy');
+    newHT.insert('Jamie', 'mommy');
     newHT.insert('June', 'baby');
     newHT.insert('here we', 'wang')
-    console.log(newHT.get('June'))
-    console.log(newHT.storage)
+    console.log(newHT.get('here we'))
+    console.log(newHT.retrieveAll())
 }
 test();
