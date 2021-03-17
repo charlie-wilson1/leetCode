@@ -4,15 +4,16 @@ ignore any punctuation
 */
 
 let isPalindrome = (str) => {
-    let arr = [];
+    str = str.toLowerCase();
+    let charArr = [];
     for (let i = 0; i < str.length; i++) {
-        if (str[i] === ' ') {
-            continue;
+        if (str[i] !== str[i].toUpperCase()) {
+            charArr.push(str[i]);
         } else {
-            arr.push(str[i]);
+            continue;
         }
     }
-    let len = arr.length;
+    let len = charArr.length;
     let mid = len / 2;
     if (mid % 1 !== 0) {
         mid = Math.floor(mid);
@@ -21,7 +22,7 @@ let isPalindrome = (str) => {
     while (index >= mid) {
         let subtract = index - (len - 1);
         let checkIndex = (index - subtract === 0) ? 0 : Math.abs(subtract);
-        if (arr[index] !== arr[checkIndex]) {
+        if (charArr[index] !== charArr[checkIndex]) {
             return false;
         }
         index--;
@@ -30,6 +31,6 @@ let isPalindrome = (str) => {
 }
 
 let test = () => {
-    console.log(isPalindrome('race cars'))
+    console.log(isPalindrome("Madam I'm Adam"))
 }
 test();
