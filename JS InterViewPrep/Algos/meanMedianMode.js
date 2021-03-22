@@ -63,5 +63,5 @@ let meanMedianMode = (arr) => {
 } 
 
 (function test() {
-    console.log(meanMedianMode([4,1,19,20,13,8, 1]));
+    console.log(meanMedianMode([4,1,19,20,13,8,1]));
 })()
