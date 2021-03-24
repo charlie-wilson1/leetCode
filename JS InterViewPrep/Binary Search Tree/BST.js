@@ -94,7 +94,7 @@ class BST {
     breadthFirstTraverse(func) {
         //implement a queue
         let queue = [];
-        //declare the rot node as this and add it to the queue
+        //declare the root node as this and add it to the queue
         let rootNode = this;
         queue.push(rootNode);
 
