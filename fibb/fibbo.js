@@ -5,7 +5,13 @@ let fibbo = (position) => {
         let index = sequence.length;
         if (sequence.length === 0 || sequence.length === 1) {
             sequence.push(1);
-            return position === index ? sequence[index] : recurse()
+            index = sequence.length;
+            if (position === index) {
+                targetNumber = sequence[index-1];
+                return
+            } else {
+                return recurse();
+            }
         } 
         if (index === position) {
             targetNumber = sequence[index-1];
@@ -20,6 +26,14 @@ let fibbo = (position) => {
 }
 
 let test = () => {
-   console.log(fibbo(12))
+    console.log('should all be true')
+    console.log(fibbo(1) === 1)
+    console.log(fibbo(2) === 1)
+    console.log(fibbo(5) === 5)
+    console.log(fibbo(7) === 13)
+    console.log(fibbo(9) === 34)
+    console.log(fibbo(12) === 144)
+    console.log(fibbo(14) === 377)
+    console.log(fibbo(15) === 610)
 }
 test();
