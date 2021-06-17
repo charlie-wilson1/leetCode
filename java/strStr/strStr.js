@@ -25,6 +25,7 @@ var strStr = function(haystack, needle) {
         return 0;
     }
     let counter = 0;
+    let tempCounter;
     let tempIndexHolder = [];
     let tempHaystack;
 
@@ -38,6 +39,7 @@ var strStr = function(haystack, needle) {
         }
         if (pool[0] === needle[0]) {
             tempHaystack = pool;
+            tempCounter = counter;
         }
         if (pool[0] === stone[0]) {
             tempIndexHolder.push(counter);
