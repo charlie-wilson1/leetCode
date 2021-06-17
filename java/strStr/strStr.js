@@ -24,35 +24,25 @@ var strStr = function(haystack, needle) {
     if (needle.length === 0) {
         return 0;
     }
-    if ((haystack.length === 1 && needle.length === 1) && (needle[0] === haystack[0])) {
-        return 0;
-    }
     let tempIndexHolder;
+    let tempHaystack;
 
-    for (let i =0; i < haystack.length; i++) {
-        if(haystack[i] === needle[0]) {
-            tempIndexHolder = i;
-            let remainingStack = haystack.slice(i + 1)
-            let remainingNeedle = needle.slice(1)
-            for (let j = 0; j <= remainingStack.length; j++) {
-                if (remainingNeedle[j] === remainingStack[j]) {
-                    if (j + 1 === remainingNeedle.length) {
-                        return tempIndexHolder
-                    } else {
-                        continue;
-                    }
-                } else {
-                    tempIndexHolder = null;
-                    break;
-                }
-            }
+    let recurse = (pool, stone) => {
+        if (pool.length === 0 && stone.length === 0) {
+            return tempIndexHolder;
         }
+        if (pool[0] === stone[0]) {
+            tempHaystack = pool.split(1);
+            recurse(pool.split(1), stone.split(1));
+        }
+        if ()
     }
+    
 
     return -1;
 };
 
 (function test() {
-    let vari = strStr("a","a")
+    let vari = strStr("hello","ll")
     console.log(vari)
 })()
