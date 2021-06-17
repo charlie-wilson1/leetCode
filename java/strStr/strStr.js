@@ -24,25 +24,44 @@ var strStr = function(haystack, needle) {
     if (needle.length === 0) {
         return 0;
     }
-    let tempIndexHolder;
+    let counter = 0;
+    let tempIndexHolder = [];
     let tempHaystack;
 
     let recurse = (pool, stone) => {
-        if (pool.length === 0 && stone.length === 0) {
-            return tempIndexHolder;
+        if (stone.length === 0) {
+            return;
+        }
+        if (pool.length === 0 && stone.length > 0) {
+            tempIndexHolder = [];
+            return;
+        }
+        if (pool[0] === needle[0]) {
+            tempHaystack = pool;
         }
         if (pool[0] === stone[0]) {
-            tempHaystack = pool.split(1);
-            recurse(pool.split(1), stone.split(1));
+            tempIndexHolder.push(counter);
+            counter++;
+            return recurse(pool.slice(1), stone.slice(1));
         }
-        if ()
-    }
-    
+        if ((pool[0] !== stone[0]) && tempHaystack){
+            tempIndexHolder = [];
+            tempIndexHolder[0] = counter - 1;
+            return recurse(tempHaystack, needle)
+            
+        } else if (pool[0] !== stone[0]) {
+            tempIndexHolder = [];
+            counter++
+            return recurse(pool.slice(1), needle)
+        }
 
-    return -1;
+    }
+    recurse(haystack, needle)
+
+    return tempIndexHolder.length ? tempIndexHolder[0] : -1;
 };
 
 (function test() {
-    let vari = strStr("hello","ll")
+    let vari = strStr("mississippi","issip")
     console.log(vari)
 })()
